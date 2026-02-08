@@ -1,6 +1,6 @@
 # All of Artist (Inspired)
 
-Create a complete playlist of an artist’s discography — filtered, deduplicated, and sorted exactly how you want.
+Create a complete playlist of your favorite artist’s discography — filtered, deduplicated, and sorted exactly how you want.
 
 Your playlist, your preference.
 
@@ -88,7 +88,7 @@ Allows you to choose which tracks to add to your favorite artist's dedicated pla
 - **Include EPs:** Whether you want an artist's `EPs` ([Extended Play](https://en.wikipedia.org/wiki/Extended_play)) to be added or not. [Default: **On**]
 - **Include compilations:** Whether you want an artist's `Compilation` to be added or not. (Usually, these contains the artist's greatest hits defined by the artist itself and/or the record label.) [Default: **Off**]
 - **Include appearances:** Whether you want an artist's featured songs that is ***not*** on the artist's discography to be added or not. (These can be found in `Appears On` section.) [Default: **On**]
-- **Include alternate version:** Whether you want tracks' live versions, remixes, sped up version, etc. to be added or not. [Default: **Off**]
+- **Include alternate version:** Whether you want tracks' live versions, remixes, sped up version, etc. to be added or not. (Alternate versions are defined by Spotify.) [Default: **Off**]
 - **Include unplayable tracks:** Whether you want an artist's unplayable songs to be added or not. [Default: **Off**]
 
 ### 🗑️ Deduplication
@@ -100,7 +100,7 @@ Automatically identify and remove duplicate tracks that suits your track priorit
 
 ### ☰ Playlist
 
-Allows you to customize how tracks will appear at your playlist. 
+Allows you to customize the creation of your favorite artist's playlist. 
 
 - **Sort order:** Determines the order of how tracks will be sorted inside the playlist. [Default: **Newest to oldest**]
 - **Limit per playlist:** Determines how many tracks each artist's playlist will have. It will automatically create another playlist when it hits the limit. [Default: **10,000**]
