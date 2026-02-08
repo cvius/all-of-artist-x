@@ -72,6 +72,8 @@ spicetify apply
 
 You can also find the option if you click the three dots (More options) when you're at your favorite artist's page.
 
+<div><img src='assets/menu.png' width=360></div>
+
 ## Settings
 
 - Click on your profile at the top-right corner and click "👤 All of Artist Settings"
@@ -105,6 +107,7 @@ Allows you to customize how tracks will appear at your playlist.
 - **Set custom cover:** Whether to automatically set the artist's profile picture as playlist cover. [Default: **On**]
 - **Make playlist public:** Whether to automatically set the playlist created as public or private playlist. [Default: **Off**]
 
+<div><img src='assets/settings.png' width=360></div>
 
 ## FAQ
 - "Are you going to add more sort order?"
