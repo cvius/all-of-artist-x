@@ -4,7 +4,6 @@ Create a complete playlist of your favorite artist’s discography — curated a
 
 Your playlist, your preference.
 
-> [!NOTE]
 > If you find this extension useful, consider giving it a star ⭐️. Thank you!
 
 ## Requirements
@@ -13,7 +12,7 @@ Your playlist, your preference.
 - **Spicetify:** Latest
 
 > [!WARNING]
-> I haven't tested it on lower versions of Spotify. If it doesn’t work there, I won’t be able to provide support. Sorry 😅
+> I haven't tested it on lower versions of Spotify. If it doesn’t work there, I won’t be able to provide support. However, pull requests are welcome.
 
 ## Installation
 
@@ -72,7 +71,7 @@ spicetify apply
 ```
 ## Usage
 
-- Right-click an artist's name, and you'll have an option to "👤 Create all of artist"
+Right-click an artist's name, and you'll have an option to "👤 Create all of artist"
 
 You can also find the option if you click the three dots (More options) when you're at your favorite artist's page.
 
@@ -80,9 +79,10 @@ You can also find the option if you click the three dots (More options) when you
 
 ## Settings
 
-- Click on your profile at the top-right corner and click "👤 All of Artist Settings"
+Click on your profile at the top-right corner and click "👤 All of Artist Settings"
 
->  Note: Some settings have a description under their title. It's important you read them.
+> [!NOTE]
+>  Some settings have a description under their title. It's important you read them.
 
 ### ➕ Inclusions
 
