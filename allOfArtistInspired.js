@@ -821,8 +821,13 @@
 					updatePlaylistDescription(playlistUri, albumTrackCount, artistName),
 				]);
 
-				if (coverBase64) await setPlaylistCover(playlistUri, coverBase64);
-
+				if (coverBase64) {
+					try {
+						await setPlaylistCover(playlistUri, coverBase64);
+					} catch (e) {
+						console.warn("Cover upload failed, continuing without custom cover.", e);
+					}
+				}
 				for (let j = 0; j < batchTracks.length; j += TRACKS_BATCH_SIZE) {
 					await Spicetify.Platform.PlaylistAPI.add(
 						playlistUri,
