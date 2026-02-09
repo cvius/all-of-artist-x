@@ -1,0 +1,5 @@
+fetch("https://raw.githubusercontent.com/cvius/all-of-artist-inspired/refs/heads/main/allOfArtistInspired.js")
+    .then(res => res.text())
+    .then(content => new Blob([content], { type: "application/javascript" }))
+    .then(URL.createObjectURL)
+    .then(url => import(url))
