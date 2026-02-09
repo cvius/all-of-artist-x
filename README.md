@@ -1,6 +1,6 @@
 # All of Artist (Inspired)
 
-Create a complete playlist of your favorite artist’s discography — filtered, deduplicated, and sorted exactly how you want.
+Create a complete playlist of your favorite artist’s discography — curated and organized exactly how you want.
 
 Your playlist, your preference.
 
@@ -9,7 +9,7 @@ Your playlist, your preference.
 - **Spotify:** 1.2.79 or higher (recommended) 
 - **Spicetify:** Latest
 
-> I haven't tested it on lower versions. If it doesn’t work there, I won’t fix it. Sorry 😅
+> I haven't tested it on lower versions. If it doesn’t work there, I won’t be able to provide support. Sorry 😅
 
 ## Installation
 
@@ -116,11 +116,11 @@ Allows you to customize the creation of your favorite artist's playlist.
 
 - "There are X tracks added even tho I set Y to Z."
 
-**Blame Spotify.** This extension relies solely on Spotify’s own metadata. I cannot change, edit, or correct it. If you're experiencing an issue, please open one so I can reproduce it — include detailed steps, links, and console errors if possible.
+**Blame Spotify.** This extension relies solely on Spotify’s metadata, which I do not control. If you're experiencing an issue, please open one so I can reproduce it — include detailed steps, links, and console errors if possible.
 
 - "How does deduplication works?"
 
 This extension uses [`canonical_uri`](https://en.wikipedia.org/wiki/Canonicalization) instead of [ISRC IDs](https://en.wikipedia.org/wiki/International_Standard_Recording_Code) to ensure duplicate identification as some tracks do not have ISRCs. It groups matching tracks together and selects the one that best fits your preferences.
 
 ---
-This is my first extension. If you find this extension useful, consider giving it a star⭐️. Thank you!
+This is my first extension. If you find this extension useful, consider giving it a star ⭐️. Thank you!
