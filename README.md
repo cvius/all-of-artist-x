@@ -16,6 +16,14 @@ Your playlist, your preference.
 
 ## Installation
 
+### 1. Using [Marketplace](https://github.com/spicetify/spicetify-marketplace)
+
+1.  Go to Marketplace
+2.  Search `All of Artist (Inspired)` under "Extensions" tab
+3.  Click the **Install** button for "All of Artist (Inspired)"
+4.  Reload the Spotify. Done!
+
+### 2. Manual Installation
 Copy `allOfArtistInspired.js` into your [Spicetify](https://github.com/spicetify/spicetify-cli) extensions directory:
 
 | **Platform** | **Path**                                                                             |
@@ -120,7 +128,7 @@ Allows you to customize the creation of your favorite artist's playlist.
 
 - "There are X tracks added even tho I set Y to Z."
 
-**Blame Spotify.** This extension relies solely on Spotify’s metadata, which this extension does not control. If you're experiencing an issue, please open one so I can reproduce it — include detailed steps, links, and console errors if possible.
+**Blame Spotify.** This extension relies solely on Spotify’s metadata, which this extension does not control. If you're experiencing an issue or have a suggestion, please create one [here](https://github.com/cvius/all-of-artist-inspired/issues/new/choose).
 
 - "How does deduplication works?"
 
