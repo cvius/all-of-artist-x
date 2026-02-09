@@ -29,7 +29,7 @@ body:
     attributes:
       label: Console logs
       description: |
-        To check the console, run `spicetify enable-devtools` in the terminal. At the top-left corner, click the three dots, find `Develop` and go to `Console` tab.
+        To check the console, run `spicetify enable-devtools` in the terminal. At the top-left corner, click the three dots, find `Developer Tools` under "Develop" and go to `Console` tab.
       placeholder: |
         You can paste the console logs in plain text if needed.
 
