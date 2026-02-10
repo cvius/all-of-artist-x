@@ -297,7 +297,7 @@
 	).register();
 
 	async function fetchInternalMetadata(uri) {
-		const id = Spicetify.URI.fromString(uri).id;
+		const id = uri.split(":")[2];
 		const type = Spicetify.URI.fromString(uri).type;
 		const hex = Spicetify.URI.idToHex(id);
 
@@ -305,6 +305,7 @@
 			const metadata = await Spicetify.Platform.RequestBuilder.build()
 				.withHost("https://spclient.wg.spotify.com/metadata/4")
 				.withPath(`/${type}/${hex}`)
+				.withEndpointIdentifier(`/${type}/${hex}`)
 				.send();
 			if (!metadata.ok) return null;
 
@@ -554,7 +555,7 @@
 		return (data.albumUnion?.tracksV2 ?? data.albumUnion?.tracks ?? []).items
 			.map(({ track }) => track)
 			.filter(track =>
-				(track.artists.items || []).some(a => Spicetify.URI.fromString(a.uri).id === artistId) &&
+				(track.artists.items || []).some(a => a.uri.split(":")[2] === artistId) &&
 				(CONFIG.includeUnplayable || track.playability.playable)
 			);
 	}
@@ -618,11 +619,8 @@
 	async function fetchAlbumTracksMetadataByType(artistId, type) {
 		let allAlbumUris = [];
 
-		if (type === "appearsOn") {
-			allAlbumUris = await fetchAppearsOn(artistId);
-		} else {
-			allAlbumUris = await fetchDiscography(artistId, type);
-		}
+		if (type === "appearsOn") allAlbumUris = await fetchAppearsOn(artistId);
+		else allAlbumUris = await fetchDiscography(artistId, type);
 
 		const albumsMetadata = await fetchAlbumsMetadata(allAlbumUris, type);
 		const albumTracks = await fetchTracks(albumsMetadata, artistId);
@@ -695,7 +693,6 @@
 	}
 
 	async function setPlaylistCover(playlistUri, b64Img) {
-		const playlistId = Spicetify.URI.fromString(playlistUri).id;
 		const bufferToHex = (buffer) =>
 			Array.from(new Uint8Array(buffer))
 				.map((b) => b.toString(16).padStart(2, "0"))
@@ -709,31 +706,45 @@
 
 		const file = await getFileFromBase64(b64Img);
 		const sessionToken = Spicetify.Platform.Session.accessToken;
-		const uploadToken = await Spicetify.Platform.PlaylistAPI.uploadImage(file);
 
-		if (!uploadToken) throw "Custom cover upload failed: No token returned.";
+		const maxRetries = 5
+		for (let attempt = 1; attempt <= maxRetries; attempt++) {
+			try {
+				const uploadToken = await Spicetify.Platform.PlaylistAPI.uploadImage(file);
+				if (!uploadToken) throw "No upload token returned.";
 
-		const regRes = await fetch(
-			`https://spclient.wg.spotify.com/playlist/v2/playlist/${playlistId}/register-image`,
-			{
-				method: "POST",
-				headers: {
-					Authorization: `Bearer ${sessionToken}`,
-					"Content-Type": "application/json",
-				},
-				body: JSON.stringify({ uploadToken }),
-			},
-		);
+				const regRes = await fetch(
+					`https://spclient.wg.spotify.com/playlist/v2/playlist/${playlistUri.split(":")[2]}/register-image`,
+					{
+						method: "POST",
+						headers: {
+							Authorization: `Bearer ${sessionToken}`,
+							"Content-Type": "application/json",
+						},
+						body: JSON.stringify({ uploadToken }),
+					}
+				);
 
-		if (!regRes.ok) throw `Custom cover registration failed: ${regRes.status}`;
+				if (!regRes.ok) throw `Registration failed: ${regRes.status}`;
 
-		const buffer = await regRes.arrayBuffer();
-		const hexBuffer = bufferToHex(buffer);
+				const buffer = await regRes.arrayBuffer();
+				const hexBuffer = bufferToHex(buffer);
 
-		await Spicetify.Platform.PlaylistAPI.setAttributes(playlistUri, { picture: hexBuffer.slice(4) });
+				await Spicetify.Platform.PlaylistAPI.setAttributes(playlistUri, { picture: hexBuffer.slice(4) });
 
-		if (typeof Spicetify.Platform.PlaylistAPI.resync === "function") {
-			await Spicetify.Platform.PlaylistAPI.resync(playlistUri);
+				if (typeof Spicetify.Platform.PlaylistAPI.resync === "function") {
+					await Spicetify.Platform.PlaylistAPI.resync(playlistUri);
+				}
+
+				const meta = await Spicetify.Platform.PlaylistAPI.getMetadata(playlistUri);
+				const isMosaic = Spicetify.URI.isMosaic(meta.images[0].url);
+				if (!isMosaic) break;
+
+				if (attempt < maxRetries) await new Promise(r => setTimeout(r, 1e3));
+			} catch (e) {
+				if (attempt === maxRetries) console.warn("Cover upload failed, continuing without custom cover.", e);
+				else await new Promise(r => setTimeout(r, 3e3));
+			}
 		}
 	}
 
@@ -786,18 +797,15 @@
 		const names = [];
 		const startNumber = maxNumber === 0 ? 1 : maxNumber + 1;
 		for (let i = 0; i < playlists; i++) {
-			if (startNumber === 1 && i === 0) {
-				names.push(baseName);
-			} else {
-				names.push(`${baseName} (${startNumber + i})`);
-			}
+			if (startNumber === 1 && i === 0) names.push(baseName);
+			else names.push(`${baseName} (${startNumber + i})`);
 		}
 
 		return names;
 	}
 
 	async function createDiscographyPlaylist(artistUri) {
-		const artistId = Spicetify.URI.fromString(artistUri).id;
+		const artistId = artistUri.split(":")[2];
 		const { name: artistName, imgUrl: artistImageUrl } = await fetchArtistInfo(artistId);
 		const baseName = `All of ${artistName}`;
 
@@ -812,8 +820,10 @@
 
 			const TRACKS_BATCH_SIZE = 100;
 			const PLAYLIST_LIMIT_SIZE = CONFIG.playlistLimit;
+
 			const playlists = Math.ceil(allTracks.length / PLAYLIST_LIMIT_SIZE);
 			const playlistNames = await getExistingPlaylistNames(baseName, playlists);
+
 			const coverBase64 = CONFIG.setCustomCover ? await fetchImageAsBase64(artistImageUrl) : null;
 
 			for (let i = 0; i < playlists; i++) {
@@ -826,13 +836,9 @@
 					updatePlaylistDescription(playlistUri, albumTrackCount, artistName),
 				]);
 
-				if (coverBase64) {
-					try {
-						await setPlaylistCover(playlistUri, coverBase64);
-					} catch (e) {
-						console.warn("Cover upload failed, continuing without custom cover.", e);
-					}
-				}
+				if (coverBase64) await setPlaylistCover(playlistUri, coverBase64);
+
+				await new Promise((t) => setTimeout(t, 1e3));
 
 				for (let j = 0; j < batchTracks.length; j += TRACKS_BATCH_SIZE) {
 					await Spicetify.Platform.PlaylistAPI.add(
@@ -842,7 +848,7 @@
 					);
 				}
 
-				await new Promise((t) => setTimeout(t, 1000));
+				await new Promise((t) => setTimeout(t, 1e3));
 			}
 
 			Spicetify.showNotification(`${baseName} created.`);
