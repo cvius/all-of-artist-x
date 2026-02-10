@@ -1,4 +1,4 @@
-fetch("https://raw.githubusercontent.com/cvius/all-of-artist-inspired/main/allOfArtistInspired.js")
+fetch("https://raw.githubusercontent.com/cvius/all-of-artist-x/main/allOfArtistX.js")
     .then(res => res.text())
     .then(content => new Blob([content], { type: "application/javascript" }))
     .then(URL.createObjectURL)

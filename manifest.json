@@ -1,8 +1,8 @@
 {
-  "name": "All Of Artist (Inspired)",
+  "name": "All Of Artist X",
   "description": "Spicetify extension to create a complete playlist of your favorite artist's discography.",
   "preview": "assets/preview.png",
-  "main": "allOfArtistLoader.mjs",
+  "main": "allOfArtistXLoader.mjs",
   "readme": "README.md",
   "authors": [
       { "name": "cvius", "url": "https://github.com/cvius/" }	

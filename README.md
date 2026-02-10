@@ -1,4 +1,4 @@
-# All of Artist (Inspired)
+# All of Artist X
 
 Create a complete playlist of your favorite artist’s discography — curated and organized exactly how you want.
 
@@ -19,12 +19,14 @@ Your playlist, your preference.
 ### 1. Using [Marketplace](https://github.com/spicetify/spicetify-marketplace)
 
 1.  Go to Marketplace
-2.  Search `All of Artist (Inspired)` under "Extensions" tab
-3.  Click the **Install** button for "All of Artist (Inspired)"
-4.  Reload the Spotify. Done!
+2.  Search `All of Artist X` under "Extensions" tab
+3.  Click the **Install** button for "All of Artist X"
+4.  Reload Spotify. Done!
+
+> If you can't see the extension in marketplace, just click "Load more"
 
 ### 2. Manual Installation
-Copy `allOfArtistLoader.mjs` into your [Spicetify](https://github.com/spicetify/spicetify-cli) extensions directory:
+Copy `allOfArtistXLoader.mjs` into your [Spicetify](https://github.com/spicetify/spicetify-cli) extensions directory:
 
 | **Platform** | **Path**                                                                             |
 | ------------ | ------------------------------------------------------------------------------------ |
@@ -35,7 +37,7 @@ Copy `allOfArtistLoader.mjs` into your [Spicetify](https://github.com/spicetify/
 After putting the extension file into the correct folder, run the following command to install the extension:
 
 ```bash
-spicetify config extensions allOfArtistLoader.mjs
+spicetify config extensions allOfArtistXLoader.mjs
 spicetify apply
 ```
 
@@ -45,7 +47,7 @@ Example:
 ```ini
 [AdditionalOptions]
 ...
-extensions = autoSkipExplicit.js|shuffle+.js|trashbin.js|allOfArtistLoader.mjs
+extensions = autoSkipExplicit.js|shuffle+.js|trashbin.js|allOfArtistXLoader.mjs
 ```
 
 Then run:
@@ -59,7 +61,7 @@ spicetify apply
 Run the following command to uninstall the extension (note the - on the end):
 
 ```bash
-spicetify config extensions allOfArtistLoader.mjs-
+spicetify config extensions allOfArtistXLoader.mjs-
 spicetify apply
 ```
 
@@ -87,7 +89,7 @@ You can also find the option if you click the three dots (More options) when you
 
 ## Settings
 
-Click on your profile at the top-right corner and click "👤 All of Artist Settings"
+Click on your profile at the top-right corner and click "👤 All of Artist X Settings"
 
 > [!NOTE]
 >  Some settings have a description under their title. It's important you read them.
@@ -138,6 +140,6 @@ This extension uses [`canonical_uri`](https://en.wikipedia.org/wiki/Canonicaliza
 
 This extension was inspired by and built with the help of ideas and code from several extensions:
 
-- [**allOfArtist**](https://github.com/pl4neta/allOfArtist) by pl4neta — for edge cases that inspired improvements.
-- [**sort-play**](https://github.com/hoeci/sort-play) by hoeci — for custom cover implementation.
-- [**shuffle+**](https://spicetify.app/docs/customization/extensions/#shuffle) by khanhas and Tetrax-10 — for the settings structure and styling. 
+- [**allOfArtist**](https://github.com/pl4neta/allOfArtist) by pl4neta
+- [**sort-play**](https://github.com/hoeci/sort-play) by hoeci
+- [**shuffle+**](https://spicetify.app/docs/customization/extensions/#shuffle) by khanhas and Tetrax-10 

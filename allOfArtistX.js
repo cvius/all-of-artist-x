@@ -1,13 +1,13 @@
-(async function allOfArtistInspired() {
+(async function allOfArtistX() {
 	if (!(Spicetify.React && Spicetify.ReactDOM && Spicetify.Platform)) {
-		setTimeout(allOfArtistInspired, 300);
+		setTimeout(allOfArtistX, 300);
 		return;
 	}
 
 	const { React } = Spicetify;
 	const { useState } = React;
 
-	const CONFIG_KEY = "allOfArtistInspired:settings";
+	const CONFIG_KEY = "allOfArtistX:settings";
 	const DEFAULT_CONFIG = {
 		includeSingles: true,
 		includeEPs: true,
@@ -320,7 +320,7 @@
 				versionTitle: body.version_title || "",
 			};
 		} catch (e) {
-			console.error(`[all-of-artist-inspired] Failed to fetch ${type} internal metadata:`, e);
+			console.error(`[all-of-artist-x] Failed to fetch ${type} internal metadata:`, e);
 			return null;
 		}
 	}
@@ -848,7 +848,7 @@
 			Spicetify.showNotification(`${baseName} created.`);
 		} catch (e) {
 			Spicetify.showNotification(`Failed to create ${baseName}`, true);
-			console.error("[all-of-artist-inspired]", e);
+			console.error("[all-of-artist-x]", e);
 		}
 	}
 })();
