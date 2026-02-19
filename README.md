@@ -8,11 +8,8 @@ Your playlist, your preference.
 
 ## Requirements
 
-- **Spotify:** 1.2.79 or higher (recommended) 
+- **Spotify:** 1.2.45 or higher (recommended) 
 - **Spicetify:** Latest
-
-> [!WARNING]
-> I haven't tested it on lower versions of Spotify. If it doesn’t work there, I won’t be able to provide support. However, pull requests are welcome.
 
 ## Installation
 
